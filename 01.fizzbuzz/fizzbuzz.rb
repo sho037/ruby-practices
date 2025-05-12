@@ -1,21 +1,18 @@
 def print_fizzbuzz(start, finish)
   (start..finish).each do | index |
-    flag = false
+    print_index_flag = true
     if index % 3 == 0
       print "Fizz"
-      flag = true
+      print_index_flag = false
     end
 
     if index % 5 == 0
       print "Buzz"
-      flag = true
+      print_index_flag = false
     end
     
-    if flag
-      puts
-    else
-      puts index
-    end
+    print index if print_index_flag
+    puts
   end
 end
 
