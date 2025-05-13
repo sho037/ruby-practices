@@ -29,7 +29,7 @@ def convert_day(day, space_time)
 end
 
 # 最初の表示
-print_stack.push("\t#{month}月 #{year}")
+print_stack.push("      #{month}月 #{year}")
 print_stack.push("日 月 火 水 木 金 土")
 
 # 月初めの空白
