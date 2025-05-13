@@ -18,9 +18,9 @@ first_day = Date.new(year, month)
 last_day = Date.new(year, month, -1)
 first_day_of_week = first_day.strftime('%w').to_i
 
-first_item = []
-first_item.push("\t#{month}月 #{year}")
-first_item.push("日 月 火 水 木 金 土")
+print_stack = []
+print_stack.push("\t#{month}月 #{year}")
+print_stack.push("日 月 火 水 木 金 土")
 
 def convert_day(day, space_time)
   day_length = day.to_s.length
@@ -31,22 +31,23 @@ def convert_day(day, space_time)
   day_ += day.to_s
 end
 
-puts first_item
-print "  " if first_day_of_week != 0
+print_stack[2] = "  " if first_day_of_week != 0
 (2..first_day_of_week).each do
-  print "   "
+  print_stack[2] += "   "
 end
 
+stack_index = 2 
 week_index = first_day_of_week
 (1..last_day.day).each do | day_index |
-  print convert_day(day_index, 3) if week_index != 0
-  print convert_day(day_index, 2) if week_index == 0
+  print_stack[stack_index] ||= ""
+  print_stack[stack_index] += convert_day(day_index, 3) if week_index != 0
+  print_stack[stack_index] += convert_day(day_index, 2) if week_index == 0
   
   week_index += 1
   if week_index % 7 == 0 && day_index != last_day.day
-    puts
+    stack_index += 1
     week_index = 0
   end
 end
 
-puts
+puts print_stack
