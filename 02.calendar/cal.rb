@@ -28,14 +28,17 @@ def convert_day(day, space_time)
   day_ += day.to_s
 end
 
+# 最初の表示
 print_stack.push("\t#{month}月 #{year}")
 print_stack.push("日 月 火 水 木 金 土")
 
+# 月初めの空白
 print_stack[2] = "  " if first_day_of_week != 0
 (2..first_day_of_week).each do
   print_stack[2] += "   "
 end
 
+# 日にち
 stack_index = 2 
 week_index = first_day_of_week
 (1..last_day.day).each do | day_index |
