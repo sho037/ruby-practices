@@ -46,10 +46,11 @@ week_index = first_day_of_week
   print_stack[stack_index] += convert_day(day_index, week_index == 0 ? 2 : 3)
   
   week_index += 1
-  if week_index % 7 == 0 && day_index != last_day.day
+  if week_index % 7 == 0
     stack_index += 1
     week_index = 0
   end
 end
 
 puts print_stack
+puts if last_day.strftime('%w').to_i == 6
