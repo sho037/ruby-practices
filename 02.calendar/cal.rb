@@ -35,7 +35,7 @@ def convert_day(day, space_time)
   day_ += day.to_s
 end
 
-print "  "
+print "  " if first_day_of_week != 0
 (2..first_day_of_week).each do
   print "   "
 end
