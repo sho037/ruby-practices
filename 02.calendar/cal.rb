@@ -43,8 +43,7 @@ stack_index = 2
 week_index = first_day_of_week
 (1..last_day.day).each do | day_index |
   print_stack[stack_index] ||= ""
-  print_stack[stack_index] += convert_day(day_index, 3) if week_index != 0
-  print_stack[stack_index] += convert_day(day_index, 2) if week_index == 0
+  print_stack[stack_index] += convert_day(day_index, week_index == 0 ? 2 : 3)
   
   week_index += 1
   if week_index % 7 == 0 && day_index != last_day.day
