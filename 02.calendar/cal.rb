@@ -17,10 +17,7 @@ year = now.year if year == 0
 first_day = Date.new(year, month)
 last_day = Date.new(year, month, -1)
 first_day_of_week = first_day.strftime('%w').to_i
-
 print_stack = []
-print_stack.push("\t#{month}月 #{year}")
-print_stack.push("日 月 火 水 木 金 土")
 
 def convert_day(day, space_time)
   day_length = day.to_s.length
@@ -30,6 +27,9 @@ def convert_day(day, space_time)
   end
   day_ += day.to_s
 end
+
+print_stack.push("\t#{month}月 #{year}")
+print_stack.push("日 月 火 水 木 金 土")
 
 print_stack[2] = "  " if first_day_of_week != 0
 (2..first_day_of_week).each do
