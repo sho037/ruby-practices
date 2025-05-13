@@ -4,20 +4,16 @@ require 'date'
 
 options = ARGV.getopts('m:', 'y:')
 
-month = options["m"]
-year = options["y"]
+if options["m"].nil? && options["y"]
+  puts "y オプションのみは対応していません" 
+  return
+end
 
 now = Date.today
-if month.nil? && year
-  puts "y オプションのみは対応していません"
-  return
-elsif month.nil? && year.nil?
-  month = now.month
-  year = now.year
-else
-  month = month.to_i
-  year = now.year
-end
+month = options["m"].to_i
+year = options["y"].to_i
+month = now.month if month == 0
+year = now.year if year == 0
 
 first_item = []
 first_item.push("\t#{month}月 #{year}")
