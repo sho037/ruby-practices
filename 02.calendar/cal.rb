@@ -55,4 +55,4 @@ week_index = first_day_of_week
 end
 
 puts print_stack
-puts if last_day.strftime('%w').to_i == 6
+puts if last_day.strftime('%w').to_i != 0
