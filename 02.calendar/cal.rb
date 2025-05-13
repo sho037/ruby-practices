@@ -17,15 +17,16 @@ year = now.year if year == 0
 first_day = Date.new(year, month)
 last_day = Date.new(year, month, -1)
 first_day_of_week = first_day.strftime('%w').to_i
+is_this_month = month == now.month ? true : false
 print_stack = []
 
-def convert_day(day, space_time)
+def convert_day(day, space_time, is_today)
   day_length = day.to_s.length
   day_ = ""
   (1..(space_time - day_length)).each do
     day_ += " "
   end
-  day_ += day.to_s
+  day_ += is_today ? "\e[7m#{day.to_s}\e[0m" : day.to_s
 end
 
 # 最初の表示
@@ -39,11 +40,12 @@ print_stack[2] = "  " if first_day_of_week != 0
 end
 
 # 日にち
+for_is_today = is_this_month ? now.day : 0
 stack_index = 2 
 week_index = first_day_of_week
 (1..last_day.day).each do | day_index |
   print_stack[stack_index] ||= ""
-  print_stack[stack_index] += convert_day(day_index, week_index == 0 ? 2 : 3)
+  print_stack[stack_index] += convert_day(day_index, week_index == 0 ? 2 : 3, for_is_today == day_index)
   
   week_index += 1
   if week_index % 7 == 0
