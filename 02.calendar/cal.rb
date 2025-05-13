@@ -43,8 +43,10 @@ week_index = first_day_of_week
   print convert_day(day_index, 2) if week_index == 0
   
   week_index += 1
-  if week_index % 7 == 0
+  if week_index % 7 == 0 && day_index != last_day.day
     puts
     week_index = 0
   end
 end
+
+puts
