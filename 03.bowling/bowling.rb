@@ -4,9 +4,7 @@
 arg_scores = ARGV[0].split(',')
 
 def convert_to_int(str_array)
-  str_array.map do |s|
-    s.eql?('X') ? 10 : s.to_i
-  end
+  str_array.map { |s| s.eql?('X') ? 10 : s.to_i }
 end
 
 arg_scores = convert_to_int(arg_scores)
