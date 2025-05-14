@@ -11,8 +11,8 @@ arg_scores = convert_to_int(arg_scores)
 
 final_score = 0
 score_index = 0
-flame_index = 0
-while flame_index < 10
+frame_index = 0
+while frame_index < 10
   if arg_scores[score_index].eql?(10)
     # ストライク
     final_score += 10 + arg_scores[score_index + 1] + arg_scores[score_index + 2]
@@ -25,7 +25,7 @@ while flame_index < 10
     final_score += arg_scores[score_index] + arg_scores[score_index + 1]
     score_index += 2
   end
-  flame_index += 1
+  frame_index += 1
 end
 
 puts final_score
