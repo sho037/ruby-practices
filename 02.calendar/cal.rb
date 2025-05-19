@@ -19,7 +19,7 @@ year = options['y'].nil? ? today.year : options['y'].to_i
 first_date = Date.new(year, month)
 last_date = Date.new(year, month, -1)
 
-first_date_of_week = first_date.strftime('%w').to_i
+first_date_of_week = first_date.wday
 is_this_month = month == today.month && year == today.year
 print_stack = []
 
