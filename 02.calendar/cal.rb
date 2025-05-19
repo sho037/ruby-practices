@@ -24,12 +24,9 @@ is_this_month = month == today.month && year == today.year
 print_stack = []
 
 def convert_day(day, space_time, is_today)
-  day_length = day.to_s.length
   day_ = ''
-  (1..(space_time - day_length)).each do
-    day_ += ' '
-  end
-  day_ += is_today ? "\e[7m#{day}\e[0m" : day.to_s
+  day_ += (is_today ? "\e[7m#{day}\e[0m" : day.to_s).rjust(2)
+  day_ += ' '
 end
 
 # 最初の表示
@@ -38,8 +35,8 @@ print_stack.push('日 月 火 水 木 金 土')
 
 # 月初めの空白
 stack_index = 2
-print_stack[stack_index] = '  ' if first_date_of_week != 0
-(2..first_date_of_week).each do
+print_stack[stack_index] = ''
+(1..first_date_of_week).each do
   print_stack[stack_index] += '   '
 end
 
