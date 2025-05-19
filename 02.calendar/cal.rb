@@ -36,14 +36,14 @@ print_stack.push("      #{month}月 #{year}")
 print_stack.push('日 月 火 水 木 金 土')
 
 # 月初めの空白
-print_stack[2] = '  ' if first_date_of_week != 0
+stack_index = 2
+print_stack[stack_index] = '  ' if first_date_of_week != 0
 (2..first_date_of_week).each do
-  print_stack[2] += '   '
+  print_stack[stack_index] += '   '
 end
 
 # 日にち
 for_is_today = is_this_month ? today.day : 0
-stack_index = 2
 week_index = first_date_of_week
 (1..last_date.day).each do |day_index|
   print_stack[stack_index] ||= ''
