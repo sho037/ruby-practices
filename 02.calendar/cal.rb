@@ -19,7 +19,6 @@ year = options['y'].nil? ? today.year : options['y'].to_i
 first_date = Date.new(year, month)
 last_date = Date.new(year, month, -1)
 
-first_date_of_week = first_date.wday
 is_this_month = month == today.month && year == today.year
 print_stack = []
 
@@ -30,7 +29,7 @@ print_stack.push('日 月 火 水 木 金 土')
 # 月初めの空白
 stack_index = 2
 print_stack[stack_index] = ''
-(1..first_date_of_week).each do
+(1..first_date.wday).each do
   print_stack[stack_index] += '   '
 end
 
