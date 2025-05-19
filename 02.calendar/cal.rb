@@ -45,4 +45,4 @@ end
 end
 
 puts print_stack
-puts if last_date.strftime('%w').to_i != 0
+puts if last_date.wday != 0
