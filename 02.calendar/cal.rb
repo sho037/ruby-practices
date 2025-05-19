@@ -32,7 +32,7 @@ is_this_month = month == today.month && year == today.year
   print_stack[stack_index] ||= ''
   is_today = is_this_month && today.day == day_index.day
   print_stack[stack_index] += (is_today ? "\e[7m#{day_index.day}\e[0m" : day_index.day.to_s).rjust(2)
-  print_stack[stack_index] += " "
+  print_stack[stack_index] += ' '
 
   stack_index += 1 if day_index.wday == 6
 end
