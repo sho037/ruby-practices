@@ -11,15 +11,15 @@ if options['m'].nil? && options['y']
   return
 end
 
-now = Date.today
+today = Date.today
 month = options['m'].to_i
 year = options['y'].to_i
-month = now.month if month.zero?
-year = now.year if year.zero?
-first_day = Date.new(year, month)
-last_day = Date.new(year, month, -1)
-first_day_of_week = first_day.strftime('%w').to_i
-is_this_month = month == now.month
+month = today.month if month.zero?
+year = today.year if year.zero?
+first_date = Date.new(year, month)
+last_date = Date.new(year, month, -1)
+first_date_of_week = first_date.strftime('%w').to_i
+is_this_month = month == today.month
 print_stack = []
 
 def convert_day(day, space_time, is_today)
@@ -36,16 +36,16 @@ print_stack.push("      #{month}月 #{year}")
 print_stack.push('日 月 火 水 木 金 土')
 
 # 月初めの空白
-print_stack[2] = '  ' if first_day_of_week != 0
-(2..first_day_of_week).each do
+print_stack[2] = '  ' if first_date_of_week != 0
+(2..first_date_of_week).each do
   print_stack[2] += '   '
 end
 
 # 日にち
-for_is_today = is_this_month ? now.day : 0
+for_is_today = is_this_month ? today.day : 0
 stack_index = 2
-week_index = first_day_of_week
-(1..last_day.day).each do |day_index|
+week_index = first_date_of_week
+(1..last_date.day).each do |day_index|
   print_stack[stack_index] ||= ''
   print_stack[stack_index] += convert_day(day_index, week_index.zero? ? 2 : 3, for_is_today == day_index)
 
@@ -57,4 +57,4 @@ week_index = first_day_of_week
 end
 
 puts print_stack
-puts if last_day.strftime('%w').to_i != 0
+puts if last_date.strftime('%w').to_i != 0
