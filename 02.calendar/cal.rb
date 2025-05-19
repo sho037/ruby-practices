@@ -21,18 +21,15 @@ last_date = Date.new(year, month, -1)
 
 print_stack = []
 
-# 最初の表示
 print_stack.push("      #{month}月 #{year}")
 print_stack.push('日 月 火 水 木 金 土')
 
-# 月初めの空白
 stack_index = 2
 print_stack[stack_index] = ''
 (1..first_date.wday).each do
   print_stack[stack_index] += '   '
 end
 
-# 日にち
 is_this_month = month == today.month && year == today.year
 (first_date..last_date).each do |day_index|
   print_stack[stack_index] ||= ''
