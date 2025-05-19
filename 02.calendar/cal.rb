@@ -42,16 +42,11 @@ end
 
 # 日にち
 for_is_today = is_this_month ? today.day : 0
-week_index = first_date_of_week
-(1..last_date.day).each do |day_index|
+(first_date..last_date).each do |day_index|
   print_stack[stack_index] ||= ''
-  print_stack[stack_index] += convert_day(day_index, for_is_today == day_index)
+  print_stack[stack_index] += convert_day(day_index.day, for_is_today == day_index.day)
 
-  week_index += 1
-  if (week_index % 7).zero?
-    stack_index += 1
-    week_index = 0
-  end
+  stack_index += 1 if day_index.wday == 6
 end
 
 puts print_stack
