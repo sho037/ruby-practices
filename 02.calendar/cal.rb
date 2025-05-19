@@ -23,12 +23,6 @@ first_date_of_week = first_date.wday
 is_this_month = month == today.month && year == today.year
 print_stack = []
 
-def convert_day(day, is_today)
-  day_ = ''
-  day_ += (is_today ? "\e[7m#{day}\e[0m" : day.to_s).rjust(2)
-  day_ += ' '
-end
-
 # 最初の表示
 print_stack.push("      #{month}月 #{year}")
 print_stack.push('日 月 火 水 木 金 土')
@@ -41,10 +35,11 @@ print_stack[stack_index] = ''
 end
 
 # 日にち
-for_is_today = is_this_month ? today.day : 0
 (first_date..last_date).each do |day_index|
   print_stack[stack_index] ||= ''
-  print_stack[stack_index] += convert_day(day_index.day, for_is_today == day_index.day)
+  is_today = is_this_month && today.day == day_index.day
+  print_stack[stack_index] += (is_today ? "\e[7m#{day_index.day}\e[0m" : day_index.day.to_s).rjust(2)
+  print_stack[stack_index] += " "
 
   stack_index += 1 if day_index.wday == 6
 end
