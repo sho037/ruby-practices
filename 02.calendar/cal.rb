@@ -19,7 +19,6 @@ year = options['y'].nil? ? today.year : options['y'].to_i
 first_date = Date.new(year, month)
 last_date = Date.new(year, month, -1)
 
-is_this_month = month == today.month && year == today.year
 print_stack = []
 
 # 最初の表示
@@ -34,6 +33,7 @@ print_stack[stack_index] = ''
 end
 
 # 日にち
+is_this_month = month == today.month && year == today.year
 (first_date..last_date).each do |day_index|
   print_stack[stack_index] ||= ''
   is_today = is_this_month && today.day == day_index.day
