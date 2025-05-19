@@ -25,10 +25,7 @@ print_stack.push("      #{month}月 #{year}")
 print_stack.push('日 月 火 水 木 金 土')
 
 stack_index = 2
-print_stack[stack_index] = ''
-(1..first_date.wday).each do
-  print_stack[stack_index] += '   '
-end
+print_stack[stack_index] = '   ' * first_date.wday
 
 is_this_month = month == today.month && year == today.year
 (first_date..last_date).each do |day_index|
