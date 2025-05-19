@@ -23,7 +23,7 @@ first_date_of_week = first_date.wday
 is_this_month = month == today.month && year == today.year
 print_stack = []
 
-def convert_day(day, space_time, is_today)
+def convert_day(day, is_today)
   day_ = ''
   day_ += (is_today ? "\e[7m#{day}\e[0m" : day.to_s).rjust(2)
   day_ += ' '
@@ -45,7 +45,7 @@ for_is_today = is_this_month ? today.day : 0
 week_index = first_date_of_week
 (1..last_date.day).each do |day_index|
   print_stack[stack_index] ||= ''
-  print_stack[stack_index] += convert_day(day_index, week_index.zero? ? 2 : 3, for_is_today == day_index)
+  print_stack[stack_index] += convert_day(day_index, for_is_today == day_index)
 
   week_index += 1
   if (week_index % 7).zero?
