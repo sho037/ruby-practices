@@ -27,10 +27,9 @@ print_stack.push('日 月 火 水 木 金 土')
 stack_index = 2
 print_stack[stack_index] = '   ' * first_date.wday
 
-is_this_month = month == today.month && year == today.year
 (first_date..last_date).each do |date|
   print_stack[stack_index] ||= ''
-  is_today = is_this_month && today.day == date.day
+  is_today = today == date
   print_stack[stack_index] += (is_today ? "\e[7m#{date.day.to_s.rjust(2)}\e[0m" : date.day.to_s.rjust(2))
   print_stack[stack_index] += ' '
 
