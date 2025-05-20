@@ -3,11 +3,11 @@
 
 arg_scores = ARGV[0].split(',')
 
-def convert_to_int(str_array)
+def to_integer_scores(str_array)
   str_array.map { |s| s == 'X' ? 10 : s.to_i }
 end
 
-arg_scores = convert_to_int(arg_scores)
+arg_scores = to_integer_scores(arg_scores)
 
 final_score = 0
 score_index = 0
