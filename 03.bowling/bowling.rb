@@ -7,21 +7,21 @@ def to_integer_scores(str_array)
   str_array.map { |s| s == 'X' ? 10 : s.to_i }
 end
 
-arg_scores = to_integer_scores(arg_scores)
+score_list = to_integer_scores(arg_scores)
 
 final_score = 0
 score_index = 0
 10.times do
-  if arg_scores[score_index] == 10
+  if score_list[score_index] == 10
     # ストライク
-    final_score += 10 + arg_scores[score_index + 1] + arg_scores[score_index + 2]
+    final_score += 10 + score_list[score_index + 1] + score_list[score_index + 2]
     score_index += 1
-  elsif arg_scores[score_index] + arg_scores[score_index + 1] == 10
+  elsif score_list[score_index] + score_list[score_index + 1] == 10
     # スペア
-    final_score += arg_scores[score_index] + arg_scores[score_index + 1] + arg_scores[score_index + 2]
+    final_score += score_list[score_index] + score_list[score_index + 1] + score_list[score_index + 2]
     score_index += 2
   else
-    final_score += arg_scores[score_index] + arg_scores[score_index + 1]
+    final_score += score_list[score_index] + score_list[score_index + 1]
     score_index += 2
   end
 end
