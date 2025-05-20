@@ -11,8 +11,7 @@ arg_scores = to_integer_scores(arg_scores)
 
 final_score = 0
 score_index = 0
-frame_index = 0
-while frame_index < 10
+10.times do
   if arg_scores[score_index] == 10
     # ストライク
     final_score += 10 + arg_scores[score_index + 1] + arg_scores[score_index + 2]
@@ -25,7 +24,6 @@ while frame_index < 10
     final_score += arg_scores[score_index] + arg_scores[score_index + 1]
     score_index += 2
   end
-  frame_index += 1
 end
 
 puts final_score
