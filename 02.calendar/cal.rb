@@ -28,13 +28,13 @@ stack_index = 2
 print_stack[stack_index] = '   ' * first_date.wday
 
 is_this_month = month == today.month && year == today.year
-(first_date..last_date).each do |day_index|
+(first_date..last_date).each do |date|
   print_stack[stack_index] ||= ''
-  is_today = is_this_month && today.day == day_index.day
-  print_stack[stack_index] += (is_today ? "\e[7m#{day_index.day}\e[0m" : day_index.day.to_s).rjust(2)
+  is_today = is_this_month && today.day == date.day
+  print_stack[stack_index] += (is_today ? "\e[7m#{date.day}\e[0m" : date.day.to_s).rjust(2)
   print_stack[stack_index] += ' '
 
-  stack_index += 1 if day_index.wday == 6
+  stack_index += 1 if date.wday == 6
 end
 
 puts print_stack
