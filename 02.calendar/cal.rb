@@ -30,7 +30,8 @@ rows[row_index] = '   ' * first_date.wday
 (first_date..last_date).each do |date|
   rows[row_index] ||= ''
   is_today = today == date
-  rows[row_index] += (is_today ? "\e[7m#{date.day.to_s.rjust(2)}\e[0m" : date.day.to_s.rjust(2))
+  day_str = date.day.to_s.rjust(2)
+  rows[row_index] += (is_today ? "\e[7m#{day_str}\e[0m" : day_str)
   rows[row_index] += ' '
 
   row_index += 1 if date.saturday?
