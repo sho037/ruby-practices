@@ -3,26 +3,30 @@
 
 arg_scores = ARGV[0].split(',')
 
-def to_integer_scores(string_scores)
-  string_scores.map { |s| s == 'X' ? 10 : s.to_i }
+def to_frames(scores)
+  shots = []
+  scores.each do |s|
+    s == 'X' ? shots.push(10, 0) : shots.push(s.to_i)
+  end
+  shots.each_slice(2).to_a.push()
 end
 
-score_list = to_integer_scores(arg_scores)
+frames = to_frames(arg_scores)
 
 final_score = 0
-score_index = 0
-10.times do
-  if score_list[score_index] == 10
-    # ストライク
-    final_score += 10 + score_list[score_index + 1] + score_list[score_index + 2]
-    score_index += 1
-  elsif score_list[score_index] + score_list[score_index + 1] == 10
-    # スペア
-    final_score += score_list[score_index] + score_list[score_index + 1] + score_list[score_index + 2]
-    score_index += 2
+
+frames[0..9].each_with_index do |frame, index|
+  if frame[0] == 10
+    final_score += 10
+    if frames[index + 1][0] == 10
+      final_score += 10 + frames[index + 2][0]
+    else
+      final_score += frames[index + 1].sum
+    end
+  elsif frame.sum == 10
+    final_score += 10 + frames[index + 1][0]
   else
-    final_score += score_list[score_index] + score_list[score_index + 1]
-    score_index += 2
+    final_score += frame.sum
   end
 end
 
