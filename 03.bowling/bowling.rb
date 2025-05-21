@@ -3,8 +3,8 @@
 
 arg_scores = ARGV[0].split(',')
 
-def to_integer_scores(str_array)
-  str_array.map { |s| s == 'X' ? 10 : s.to_i }
+def to_integer_scores(string_scores)
+  string_scores.map { |s| s == 'X' ? 10 : s.to_i }
 end
 
 score_list = to_integer_scores(arg_scores)
