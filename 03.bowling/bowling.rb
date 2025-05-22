@@ -8,7 +8,7 @@ def to_frames(scores)
   scores.each do |s|
     s == 'X' ? shots.push(10, 0) : shots.push(s.to_i)
   end
-  shots.each_slice(2).to_a.push()
+  shots.each_slice(2).to_a
 end
 
 frames = to_frames(arg_scores)
