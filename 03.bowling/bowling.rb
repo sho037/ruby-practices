@@ -16,17 +16,15 @@ frames = to_frames(arg_scores)
 final_score = 0
 
 frames[0..9].each_with_index do |frame, index|
+  final_score += frame.sum
   if frame[0] == 10
-    final_score += 10
     if frames[index + 1][0] == 10
       final_score += 10 + frames[index + 2][0]
     else
       final_score += frames[index + 1].sum
     end
   elsif frame.sum == 10
-    final_score += 10 + frames[index + 1][0]
-  else
-    final_score += frame.sum
+    final_score += frames[index + 1][0]
   end
 end
 
