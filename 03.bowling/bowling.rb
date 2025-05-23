@@ -18,17 +18,14 @@ final_score = 0
 frames[0..9].each_with_index do |frame, index|
   final_score += frame.sum
   next if frame.sum != 10
-
-  if frame[0] == 10
-    final_score += 
+  final_score += frames[index + 1][0]
+  next if frame[0] != 10
+  final_score +=
       if frames[index + 1][0] == 10
-        10 + frames[index + 2][0]
+        frames[index + 2][0]
       else
-        frames[index + 1].sum
+        frames[index + 1][1]
       end
-  else
-    final_score += frames[index + 1][0]
-  end
 end
 
 puts final_score
