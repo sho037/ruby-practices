@@ -17,7 +17,7 @@ final_score = 0
 
 frames[0..9].each_with_index do |frame, index|
   final_score += frame.sum
-  next if frame[0] != 10 && frame.sum != 10
+  next if frame.sum != 10
 
   if frame[0] == 10
     final_score += 
