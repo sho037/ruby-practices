@@ -6,8 +6,7 @@ MAX_COLUMNS = 3
 dir_and_files = Dir.glob("*").sort
 
 # 何行必要か
-how_many_rows = dir_and_files.length / MAX_COLUMNS
-how_many_rows += 1 unless dir_and_files.length % MAX_COLUMNS == 0
+how_many_rows = (dir_and_files.length.to_f / MAX_COLUMNS).ceil
 
 # 列ごとの最大文字数
 max_num_per_column = []
