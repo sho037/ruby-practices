@@ -8,26 +8,16 @@ dir_and_files = Dir.glob("*").sort
 # 何行必要か
 how_many_rows = (dir_and_files.length.to_f / MAX_COLUMNS).ceil
 
-# 列ごとの最大文字数
-max_num_per_column = []
-
-daf_index = 0
-MAX_COLUMNS.times do |index|
-  max_num_per_column[index] ||= 0
-  how_many_rows.times do
-    next unless dir_and_files[daf_index]
-    max_num_per_column[index] = dir_and_files[daf_index].length if max_num_per_column[index] < dir_and_files[daf_index].length
-    daf_index += 1
-  end
-end
+max_str_num = 0
+dir_and_files.each { |daf| max_str_num = daf.length if daf.length > max_str_num }
 
 rows = []
 daf_index = 0
-MAX_COLUMNS.times do |max_c_index|
+MAX_COLUMNS.times do
   how_many_rows.times do |index|
     next unless dir_and_files[daf_index]
     rows[index] ||= ""
-    rows[index] = rows[index] + dir_and_files[daf_index].ljust(max_num_per_column[max_c_index]) + "\t"
+    rows[index] = rows[index] + dir_and_files[daf_index].ljust(max_str_num) + "\t"
     daf_index += 1
   end
 end
