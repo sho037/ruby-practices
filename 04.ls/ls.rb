@@ -5,7 +5,6 @@ MAX_COLUMNS = 3
 
 dir_and_files = Dir.glob("*").sort
 
-# 何行必要か
 how_many_rows = (dir_and_files.length.to_f / MAX_COLUMNS).ceil
 
 max_str_num = 0
