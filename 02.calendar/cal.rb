@@ -31,7 +31,7 @@ rows[row_index] = '   ' * first_date.wday
   rows[row_index] ||= ''
   is_today = today == date
   day_str = date.day.to_s.rjust(2)
-  rows[row_index] += (is_today ? "\e[7m#{day_str}\e[0m" : day_str)
+  rows[row_index] += is_today ? "\e[7m#{day_str}\e[0m" : day_str
   rows[row_index] += ' '
 
   row_index += 1 if date.saturday?
