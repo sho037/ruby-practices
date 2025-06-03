@@ -15,10 +15,10 @@ class Frame
   end
 
   def spare?
-    @first.score + @second.score == 10
+    sum == 10
   end
 
   def sum
-    @first.score + @second.score
+    [@first, @second].map(&:score).sum
   end
 end
