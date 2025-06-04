@@ -6,14 +6,12 @@ MAX_COLUMNS = 3
 def main
   dir_and_files = Dir.glob('*').sort
 
-  rows_count = (dir_and_files.length.to_f / MAX_COLUMNS).ceil
-  max_str_num = 0
-  dir_and_files.each { |daf| max_str_num = daf.length if daf.length > max_str_num }
-
-  puts format_columns_by_row_count(dir_and_files, rows_count, max_str_num)
+  puts format_columns(dir_and_files)
 end
 
-def format_columns_by_row_count(items, rows_count, column_width)
+def format_columns(items)
+  rows_count = (items.length.to_f / MAX_COLUMNS).ceil
+  column_width = items.map(&:length).max
   rows = []
   row_index = 0
 
