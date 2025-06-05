@@ -29,7 +29,7 @@ def to_frames(scores)
   sliced_frames << extract_bonus_shots(scores[break_index..])
 
   sliced_frames.map do |frame|
-    Frame.new(frame[0], frame[1], frame[2] || Shot.new(0), frame[2] ? true : false)
+    Frame.new(frame[0], frame[1], frame[2])
   end
 end
 
