@@ -10,7 +10,7 @@ class Game
   def score
     final_score = @frames[0..8].each_with_index.sum do |frame, index|
       score = frame.sum
-      score + Frame.calc_bonus(frame, @frames[index + 1..])
+      score + frame.calc_bonus(@frames[index + 1..])
     end
     final_score + @frames.last.sum
   end
