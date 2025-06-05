@@ -8,37 +8,23 @@ require_relative './game'
 def main
   arg_scores = ARGV[0].split(',')
 
-  frames = to_frames(arg_scores)
+  frames = to_frames(arg_scores.map { |as| Shot.new(as) })
 
   game = Game.new(frames)
 
   puts game.score
 end
 
-def to_frames(scores)
-  shots = []
-  break_index = 0
-  scores.each_with_index do |score, index|
-    break_index = index
-    break if shots.size >= 18
-
-    Shot.strike?(score) ? shots.push(Shot.new(10), Shot.new(0)) : shots.push(Shot.new(score.to_i))
+def to_frames(shots)
+  frames = Array(0..8).map do
+    first = shots.shift
+    if first.strike?
+      Frame.new(first, nil, nil)
+    else
+      Frame.new(first, shots.shift, nil)
+    end
   end
-
-  sliced_frames = shots.each_slice(2).to_a
-  sliced_frames << extract_bonus_shots(scores[break_index..])
-
-  sliced_frames.map do |frame|
-    Frame.new(frame[0], frame[1], frame[2])
-  end
-end
-
-def extract_bonus_shots(bonus_scores)
-  bonus_shots = bonus_scores.map do |s|
-    Shot.strike?(s) ? Shot.new(10) : Shot.new(s.to_i)
-  end
-
-  [bonus_shots[0], bonus_shots[1], bonus_shots[2]]
+  frames.push(Frame.new(shots[0], shots[1], shots[2]))
 end
 
 main

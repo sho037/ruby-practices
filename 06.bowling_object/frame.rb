@@ -29,10 +29,10 @@ class Frame
   end
 
   def spare?
-    [@first, @second].map(&:score).sum == 10 && !strike?
+    [@first, @second || Shot.new(0)].map(&:score).sum == 10 && !strike?
   end
 
   def sum
-    [@first, @second, @third || Shot.new(0)].map(&:score).sum
+    [@first, @second || Shot.new(0), @third || Shot.new(0)].map(&:score).sum
   end
 end
