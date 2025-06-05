@@ -38,7 +38,7 @@ def extract_bonus_shots(bonus_scores)
     Shot.strike?(s) ? Shot.new(10) : Shot.new(s.to_i)
   end
 
-  [bonus_shots[0] || Shot.new(0), bonus_shots[1] || Shot.new(0), bonus_shots[2] || Shot.new(0)]
+  [bonus_shots[0], bonus_shots[1], bonus_shots[2]]
 end
 
 main
