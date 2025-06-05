@@ -3,7 +3,7 @@
 require_relative './shot'
 
 class Frame
-  attr_reader :first, :second, :bonus, :is_final
+  attr_reader :first, :second, :third, :is_final
 
   def self.calc_bonus(frame, behind_frames)
     return 0 unless frame.strike? || frame.spare?
@@ -18,10 +18,10 @@ class Frame
             end
   end
 
-  def initialize(first, second, bonus, is_final)
+  def initialize(first, second, third, is_final)
     @first = first
     @second = second
-    @bonus = bonus
+    @third = third
     @is_final = is_final
   end
 
@@ -34,6 +34,6 @@ class Frame
   end
 
   def sum
-    [@first, @second, @bonus].map(&:score).sum
+    [@first, @second, @third].map(&:score).sum
   end
 end
