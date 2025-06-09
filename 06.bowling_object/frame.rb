@@ -16,11 +16,11 @@ class Frame
   end
 
   def spare?
-    [@first, @second || Shot.new(0)].map(&:score).sum == 10 && !strike?
+    [@first, @second].compact.map(&:score).sum == 10 && !strike?
   end
 
   def sum
-    [@first, @second || Shot.new(0), @third || Shot.new(0)].map(&:score).sum
+    [@first, @second, @third].compact.map(&:score).sum
   end
 
   def calc_bonus(behind_frames)
