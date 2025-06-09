@@ -19,7 +19,7 @@ class Frame
     [@first, @second].compact.map(&:score).sum == 10 && !strike?
   end
 
-  def sum
+  def base_score
     [@first, @second, @third].compact.map(&:score).sum
   end
 
