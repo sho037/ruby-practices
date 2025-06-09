@@ -23,16 +23,16 @@ class Frame
     [@first, @second, @third].compact.map(&:score).sum
   end
 
-  def calc_bonus(behind_frames)
+  def calc_bonus(next_frame, after_next_frame)
     return 0 unless strike? || spare?
 
-    bonus = behind_frames[0].first.score
+    bonus = next_frame.first.score
     return bonus unless strike?
 
-    bonus + if behind_frames[0].third || !behind_frames[0].strike?
-              behind_frames[0].second.score
+    bonus + if next_frame.third || !next_frame.strike?
+              next_frame.second.score
             else
-              behind_frames[1].first.score
+              after_next_frame.first.score
             end
   end
 end
