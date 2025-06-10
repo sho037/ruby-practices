@@ -19,15 +19,15 @@ class Frame
     [@first, @second].compact.map(&:score).sum == 10 && !strike?
   end
 
-  def frame_score(next_frame, after_next_frame)
-    base_score + calc_bonus(next_frame, after_next_frame)
+  def score(next_frame, after_next_frame)
+    base_score + bobus_score(next_frame, after_next_frame)
   end
 
   def base_score
     [@first, @second, @third].compact.map(&:score).sum
   end
 
-  def calc_bonus(next_frame, after_next_frame)
+  def bobus_score(next_frame, after_next_frame)
     return 0 unless strike? || spare?
 
     bonus = next_frame.first.score
