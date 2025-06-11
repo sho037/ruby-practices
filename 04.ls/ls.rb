@@ -1,10 +1,13 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require 'optparse'
+
 MAX_COLUMNS = 3
 
 def main
-  dir_and_files = Dir.glob('*').sort
+  options = ARGV.getopts('a')
+  dir_and_files = (options['a'] ? Dir.entries('.') : Dir.glob('*')).sort
 
   puts format_columns(dir_and_files)
 end
