@@ -6,8 +6,9 @@ require 'optparse'
 MAX_COLUMNS = 3
 
 def main
-  options = ARGV.getopts('a')
+  options = ARGV.getopts('a', 'r')
   dir_and_files = (options['a'] ? Dir.entries('.') : Dir.glob('*')).sort
+  dir_and_files.reverse! if options['r']
 
   puts format_columns(dir_and_files)
 end
