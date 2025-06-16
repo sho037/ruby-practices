@@ -34,14 +34,11 @@ end
 def format_list(items)
   rows = []
 
-  stat_items = items.map do |item|
-    {
-      stat: File.stat(item),
-      name: item
-    }
-  end
+  stat_items = items.map { |item| { stat: File.stat(item), name: item } }
 
+  blocks_total = 0
   stat_items.each_with_index do |item, index|
+    blocks_total += item[:stat].blocks
     rows[index] = [
       convert_to_file_type(item[:stat]) + convert_to_permission(item[:stat].mode.to_s(8).chars.last(3)),
       item[:stat].nlink.to_s,
@@ -55,7 +52,7 @@ def format_list(items)
 
   rows = indent_list(rows)
 
-  rows.unshift("total #{items.length}")
+  rows.unshift("total #{blocks_total}")
 end
 
 FILE_TYPE = {
