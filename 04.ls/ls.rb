@@ -39,15 +39,15 @@ def format_list(items)
   blocks_total = 0
   stat_items.each_with_index do |item, index|
     blocks_total += item[:stat].blocks
-    rows[index] = [
-      convert_to_file_type(item[:stat]) + convert_to_permission(item[:stat].mode.to_s(8).chars.last(3)),
-      item[:stat].nlink.to_s,
-      Etc.getpwuid(item[:stat].uid).name,
-      Etc.getgrgid(item[:stat].gid).name,
-      item[:stat].size.to_s,
-      item[:stat].birthtime.strftime('%m %d %H:%M'),
-      item[:name]
-    ]
+    rows[index] = {
+      mode: convert_to_file_type(item[:stat]) + convert_to_permission(item[:stat].mode.to_s(8).chars.last(3)),
+      nlink: item[:stat].nlink.to_s,
+      uid_name: Etc.getpwuid(item[:stat].uid).name,
+      gid_name: Etc.getgrgid(item[:stat].gid).name,
+      size: item[:stat].size.to_s,
+      date: item[:stat].birthtime.strftime('%m %d %H:%M'),
+      name: item[:name]
+    }
   end
 
   rows = indent_list(rows)
@@ -87,22 +87,22 @@ end
 
 def indent_list(items)
   max_str_num = {
-    'nlink' => 0, 'uid.name' => 0, 'gid.name' => 0, 'size' => 0, 'date' => 0
+    nlink: 0, uid_name: 0, gid_name: 0, size: 0, date: 0
   }
 
   items.each do |item|
-    max_str_num.each_key.with_index do |key, idx|
-      max_str_num[key] = [max_str_num[key], item[idx + 1].length].max
+    max_str_num.each_key do |key|
+      max_str_num[key] = [max_str_num[key], item[key].length].max
     end
   end
 
   items.map do |item|
-    item[1] = item[1].rjust(max_str_num['nlink'])
-    item[2] = item[2].ljust(max_str_num['uid.name'] + 1)
-    item[3] = item[3].ljust(max_str_num['gid.name'])
-    item[4] = item[4].rjust(max_str_num['size'])
-    item[5] = item[5].rjust(max_str_num['date'])
-    item.join(' ')
+    [item[:mode], item[:nlink].rjust(max_str_num[:nlink]),
+     item[:uid_name].ljust(max_str_num[:uid_name] + 1),
+     item[:gid_name].ljust(max_str_num[:gid_name] + 1),
+     item[:size].rjust(max_str_num[:size]),
+     item[:date].rjust(max_str_num[:date]),
+     item[:name]].join(' ')
   end
 end
 
