@@ -5,25 +5,23 @@ require 'optparse'
 
 def main
   options = ARGV.getopts('l', 'w', 'c')
-  files = ARGV
+  files = ARGV.empty? ? gets.chomp.split(/[ \n\t]+/).reject(&:empty?) : ARGV
+
   infos = files.map { |file_name| WcInfo.summary_from_file_name(file_name) }.compact
-  flags =
-    if options.values.any?
-      { lines: options['l'], words: options['w'], bytes: options['c'] }
-    else
-      { lines: true, words: true, bytes: true }
-    end
 
-  infos.each { |info| puts info.to_s(**flags) }
+  infos.each { |info| puts info.to_s(**opt_parse(options)) }
 
-  total_info = WcInfo.new(
-    'total',
-    infos.sum(&:lines),
-    infos.sum(&:words),
-    infos.sum(&:bytes)
-  )
+  total_info = WcInfo.new('total', infos.sum(&:lines), infos.sum(&:words), infos.sum(&:bytes))
 
-  puts total_info.to_s(**flags)
+  puts total_info.to_s(**opt_parse(options))
+end
+
+def opt_parse(options)
+  if options.values.any?
+    { lines: options['l'], words: options['w'], bytes: options['c'] }
+  else
+    { lines: true, words: true, bytes: true }
+  end
 end
 
 class WcInfo
