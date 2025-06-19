@@ -37,6 +37,9 @@ class WcInfo
   rescue Errno::ENOENT
     puts "wc: #{file_name}: open: No such file or directory"
     nil
+  rescue Errno::EISDIR
+    puts "wc: #{file_name}: read: Is a directory"
+    nil
   rescue StandardError => e
     puts "wc: #{file_name}: open: #{e.class} #{e.message}"
     nil
