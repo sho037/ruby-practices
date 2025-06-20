@@ -5,14 +5,19 @@ require 'optparse'
 
 def main
   options = ARGV.getopts('l', 'w', 'c')
-  files = ARGV.empty? ? gets.chomp.split(/[ \n\t]+/).reject(&:empty?) : ARGV
 
-  infos = files.map { |file_name| WcInfo.summary_from_file_name(file_name) }.compact
+  infos = ARGV.empty? ? [WcInfo.summary_from_body(readlines)] : ARGV.map { |file_name| WcInfo.summary_from_file_name(file_name) }.compact
 
   infos.each { |info| puts info.to_s(**opt_parse(options)) }
 
-  total_info = WcInfo.new('total', infos.sum(&:lines), infos.sum(&:words), infos.sum(&:bytes))
+  return if ARGV.empty?
 
+  total_info = WcInfo.new(
+    'total',
+    infos.sum(&:lines),
+    infos.sum(&:words),
+    infos.sum(&:bytes)
+  )
   puts total_info.to_s(**opt_parse(options))
 end
 
@@ -43,6 +48,15 @@ class WcInfo
   rescue StandardError => e
     puts "wc: #{file_name}: open: #{e.class} #{e.message}"
     nil
+  end
+
+  def self.summary_from_body(body)
+    new(
+      '',
+      body.length,
+      body.join.split(/[ \t\r\n,.]+/).size,
+      body.join.bytesize
+    )
   end
 
   def initialize(name, lines, words, bytes)
