@@ -10,7 +10,7 @@ def main
 
   infos.each { |info| puts info.to_s(**opt_parse(options)) }
 
-  return if ARGV.empty?
+  return if infos.length <= 1
 
   total_info = WcInfo.new(
     'total',
